@@ -75,10 +75,11 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": ['redis://:p4cf52470deed91899ec5b5d9cfe3aa7f1f075c0fb70489239ff08c4a0d863e8b@ec2-34-197-161-211.compute-1.amazonaws.com:13869'],
         },
     },
 }
+#(127.0.0.1', 6379)
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -127,3 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
