@@ -24,7 +24,7 @@
 						</div>
 						<div class="content">
 							<div class="inner">
-								<h1>Welcome, Amr to {test}!</h1>
+								<h1>Welcome, <a id="usernamenow"></a> to {-{{ room_name }}-}!</h1>
 								<!-- view chat -->
 <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>
 							</div>
@@ -62,6 +62,8 @@
 <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 	var currentUser = localStorage.getItem("userName")
+document.getElementById('usernamenow').innerHTML = currentUser;
+
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
