@@ -25,7 +25,7 @@
 						<div class="content">
 							<div class="inner">
 								<h1>Welcome, <a id="usernamenow"></a> to {-{{ room_name }}-}!</h1>
-
+<h3> There are <a id="live-users" style="color:red"></a> active users in this channel </h3>
 								<!-- view chat -->
 <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>
 							</div>
@@ -76,6 +76,7 @@ document.getElementById('usernamenow').innerHTML = currentUser;
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('#chat-log').value += (data.message + '\n');
+	    document.getElementById('live-users').innerHTML = data.live;
         };
 
         chatSocket.onclose = function(e) {
