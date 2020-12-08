@@ -1,4 +1,4 @@
-## Asynchronous Group Chat [Real-Time] [![Django](https://img.shields.io/badge/Django-2.2.9-yellow.svg)] [![Django](https://img.shields.io/badge/Django%20channels-3.0.2-green.svg)]
+## Asynchronous Group Chat [Real-Time] ![Django](https://img.shields.io/badge/Django-2.2.9-yellow.svg) ![Django](https://img.shields.io/badge/Django%20channels-3.0.2-green.svg)
 
 
 ## Table of contents
@@ -23,5 +23,8 @@ To run this project, install it locally and make sure to install the twisted ver
 Here is the Twisted v20.3.0 for windows, You will find the file in the repo
 
 ```
-$ pip install Twisted-20.3.0-cp38-cp38-win_amd64.whl
+$ pip install requirements.txt
+$ python manage.py runserver
 ```
+
+After running the server make sure to run the redis server located inside [redis/redis-server.exe]
