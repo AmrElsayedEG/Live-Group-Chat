@@ -42,7 +42,7 @@
 						<!-- Join Chat -->
 							<article id="join">
 								<h2 class="major">Join Chat</h2>
-								<form method="POST" onsubmit="addName();">
+								<form method="POST" onsubmit="joinName();">
 									{% csrf_token %}
 									<div class="fields">
 										<div class="field half">
@@ -68,10 +68,10 @@
 							</article>
 
 						<!-- Create Chat-->
-							<article id="create" onsubmit="addName();">
+							<article id="create">
 								<h2 class="major">Create New Room</h2>
 								{{form.errors.name}}
-								<form method="POST">
+								<form method="POST" onsubmit="createName();">
 									{% csrf_token %}
 									<div class="fields">
 										<div class="field half">
@@ -85,7 +85,6 @@
 										
 									</div>
 									<button type="submit" class="primary">Create Room Now!</button>
-								</form>
 								</form>
 								
 							</article>
@@ -114,8 +113,13 @@
 			<script src="{% static 'js/main.js' %}"></script>
 			
 			<script>
-        function addName(){
+        function joinName(){
+			console.log(document.querySelector('#join #user-name').value);
 			var userName = document.querySelector('#user-name').value;
+			localStorage.setItem("userName",userName);
+		}
+		function createName(){
+			var userName = document.querySelector('#create #user-name').value;
 			localStorage.setItem("userName",userName);
 		}
     </script>

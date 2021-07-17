@@ -33,11 +33,16 @@ class ChatConsumer(WebsocketConsumer):
         )
         
         room = Room.objects.filter(name=self.room_name).last()
-        room.current_users -= 1 if room.current_users > 0 else 0
-        room.save()
+        if room.current_users > 1:
+            room.current_users -= 1
+            room.save()
+            live = room.current_users
+        else:
+            room.delete()
+            live = 0
 
         #Send message to channel that user joined
-        self.receive(json.dumps({'message':'|--User left the channel--|', 'live' : room.current_users}))
+        self.receive(json.dumps({'message':'|--User left the channel--|', 'live' : live}))
 
     # Receive message from WebSocket
     def receive(self, text_data):
