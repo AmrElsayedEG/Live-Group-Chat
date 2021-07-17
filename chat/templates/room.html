@@ -1,18 +1,76 @@
-<!-- chat/templates/chat/room.html -->
-<!DOCTYPE html>
+{% load static %}
+<!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body>
-    <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
+	<head>
+		<title>Anonymous Group Chat</title>
+		<meta charset="utf-8" />
+<meta author="amr elsayed" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+
+
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Welcome, <a id="usernamenow"></a> to {-{{ room_name }}-}!</h1>
+<h3> There are <a id="live-users" style="color:red"></a> active users in this channel </h3>
+								<!-- view chat -->
+<textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<!-- send button -->
+								<input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
-    <script>
+								
+							</ul>
+						</nav>
+					</header>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy;<a href="https://github.com/AmrElsayedEG/">Amr Elsayed</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/browser.min.js' %}"></script>
+			<script src="{% static 'js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+
+
+<script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
-	var currentUser = localStorage.getItem("userName")
+	var currentUser = localStorage.getItem("userName");
+	if (currentUser == null){
+			console.log(currentUser);
+			while((currentUser == null) || (currentUser == "")){
+				currentUser = prompt("Enter Your Name");
+			};
+		};
+document.getElementById('usernamenow').innerHTML = currentUser;
+
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
@@ -24,6 +82,10 @@
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('#chat-log').value += (data.message + '\n');
+			if (data.live != null){
+				document.getElementById('live-users').innerHTML = data.live;
+			}
+	    
         };
 
         chatSocket.onclose = function(e) {
@@ -46,5 +108,5 @@
             messageInputDom.value = '';
         };
     </script>
-</body>
+	</body>
 </html>

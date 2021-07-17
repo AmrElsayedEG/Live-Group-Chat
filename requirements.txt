@@ -25,6 +25,6 @@ pytz==2020.4
 service-identity==18.1.0
 six==1.15.0
 sqlparse==0.4.1
-Twisted @ file:///D:/django/Django%20Channels/chat/mysite/Twisted-20.3.0-cp38-cp38-win_amd64.whl
+Twisted
 txaio==20.4.1
 zope.interface==5.1.2
