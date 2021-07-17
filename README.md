@@ -11,6 +11,7 @@
 - Users can create a new group or join existing group chat.
 - No messages saved in the database so when you end your session the messages disappear forever.
 - You can see the number of online users in your group chat and also see when user join or leave your channel.
+- Once there is no one in the room, The room is deleted automatically.
 - This project built using Django and Django Channels (WebSockets) so it's completely asynchronous application.
 
 ## Technologies
